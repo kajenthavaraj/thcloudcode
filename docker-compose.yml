@@ -1,0 +1,56 @@
+version: "3"
+services:
+  chrome:
+    image: selenium/node-chrome:4.8.0-20230202
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  selenium-hub:
+    image: selenium/hub:4.8.0-20230202
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    volumes:
+      - ./app:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
+    command: sh -c "python3 bot.py"
+    depends_on:
+      - chrome
+      - selenium-hub
+      - ffmpeg
+
+  chrome_video:
+    image: selenium/video:ffmpeg-4.3.1-20230202
+    container_name: chrome-video
+    volumes:
+      - ./app/videos:/videos
+    depends_on:
+      - chrome
+      - ffmpeg
+    environment:
+      CONTAINER_START_TIME: "$(date +%s)"
+      DISPLAY_CONTAINER_NAME: chrome
+      FILE_NAME: chrome_video.mp4
+
+  ffmpeg:
+    image: jrottenberg/ffmpeg:4.4-alpine
+
+
+# Use start up script
+# Upload this to Github
+# 1.) Download this from Github
+# 2.) Download docker compose and dependencies
+# 3.) Docker compose up 
