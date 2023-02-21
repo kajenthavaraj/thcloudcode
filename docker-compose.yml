@@ -41,7 +41,6 @@ services:
       - chrome
       - ffmpeg
     environment:
-      CONTAINER_START_TIME: "$(date +%s)"
       DISPLAY_CONTAINER_NAME: chrome
       FILE_NAME: chrome_video.mp4
 
