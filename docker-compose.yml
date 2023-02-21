@@ -19,9 +19,9 @@ services:
       - "4444:4444"
 
   app:
-    #build:
-      #context: .
-    image: gcr.io/th-vm-tutorial/deploy1@sha256:1cb2cada90da5e4b3993b01efbe788c658b322ccaad45a08ce86ed4c3b5683ed
+    build:
+      context: .
+    #image: gcr.io/th-vm-tutorial/deploy1@sha256:1cb2cada90da5e4b3993b01efbe788c658b322ccaad45a08ce86ed4c3b5683ed
     volumes:
       - ./app:/app
       - /var/run/docker.sock:/var/run/docker.sock
