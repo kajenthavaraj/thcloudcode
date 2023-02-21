@@ -21,7 +21,6 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.app
     volumes:
       - ./app:/app
       - /var/run/docker.sock:/var/run/docker.sock
