@@ -92,10 +92,10 @@ start_trim = browswer_run(tab_list, wait_time_list)
 
 i = 182
 # specify the image file name
-#image_name = '{0}_{1}.png'.format("hello", i)
+image_name = '{0}_{1}.png'.format("hello", i)
 # Take a screenshot
-#driver.save_screenshot(image_name)
-#upload_file(image_name)
+driver.save_screenshot(image_name)
+upload_file(image_name)
 
 end_trim = end_record()
 print(end_trim)
