@@ -126,6 +126,7 @@ sleep(10)
 
 print("Starting outputf.mp4 upload to Google")
 upload_file('./videos/outputf.mp4')
+upload_file('./videos/output1.mp4')
 
 # Shut down Docker Compose
 #subprocess.call("docker-compose down", shell=True)
